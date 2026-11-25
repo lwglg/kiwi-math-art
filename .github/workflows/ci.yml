@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - name: Install Python and dependencies
+        run: uv sync --locked
+      - name: Ruff lint and format check
+        run: make lint
+      - name: Mypy
+        run: make typecheck
+      - name: Pytest (coverage >= 80%)
+        run: make test
+
+  docs:
+    runs-on: ubuntu-latest
+    needs: qa
+    strategy:
+      matrix:
+        lang: [en, de, pt, ru, fa]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync --locked
+      - name: Render a quick preview image
+        run: make image DECIMATION=4
+      - name: Compile PDF (${{ matrix.lang }})
+        run: make pdf LANG_CODE=${{ matrix.lang }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kiwi-${{ matrix.lang }}
+          path: build/*.pdf
