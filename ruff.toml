@@ -1,0 +1,30 @@
+line-length = 100
+target-version = "py314"
+src = ["src", "tests", "tools"]
+
+[lint]
+preview = true
+explicit-preview-rules = true
+select = [
+    "E", "F", "W", "I", "B", "UP", "N", "SIM", "C4", "RUF", "PT",
+    # Blank lines around definitions (pycodestyle E30x, still preview in Ruff).
+    "E301", "E302", "E303", "E304", "E305", "E306",
+]
+ignore = ["RUF002", "RUF003"]
+
+[lint.isort]
+lines-after-imports = 2
+
+[lint.per-file-ignores]
+"tests/**" = ["B018"]
+
+# NOTE: Ruff keeps the blank lines you write but never inserts them between
+# ordinary statements. That part of the house style (one blank line between
+# statements of a function body) is applied by `tools/spacing.py`, which
+# `make format` runs before `ruff format` and `make lint` runs in --check mode.
+
+[format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "lf"
+docstring-code-format = true
