@@ -1,10 +1,10 @@
-name: CI
+name: CI - QA pipeline
 
 on:
   push:
-    branches: [main]
+    branches: [master, develop]
   pull_request:
-
+    branches: [develop]
 permissions:
   contents: read
 
