@@ -1,5 +1,7 @@
 # kiwi-math-art
 
+[![CI - QA pipeline](https://github.com/lwglg/kiwi-math-art/actions/workflows/ci.yml/badge.svg)](https://github.com/lwglg/kiwi-math-art/actions/workflows/ci.yml)
+
 **🇬🇧 English (UK)** · [🇧🇷 Português (Brasil)](README.pt-BR.md) · [🇩🇪 Deutsch (DE)](README.de-DE.md) · [🇷🇺 Русский (RU)](README.ru-RU.md) · [🇮🇷 فارسی (ایران)](README.fa-IR.md)
 
 Mathematical documentation (Typst, in en-GB, de-DE, pt-BR, ru-RU and fa-IR) and a Python implementation of a kiwi drawn
